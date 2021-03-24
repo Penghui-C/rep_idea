@@ -14,5 +14,8 @@ public interface ResourceMapper {
 
     public List<Resource> findAllResourceByPage(ResourseVo resourseVo);
 
-
+    /*
+    *   删除资源分类下对应的资源（根据category_id删除）
+    * */
+    public void deleteResourceByCategoryId(Integer categoryId);
 }

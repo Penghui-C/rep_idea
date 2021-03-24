@@ -24,5 +24,8 @@
 
     </select>
 
-
+    <!--删除资源分类下对应的资源（根据category_id删除）-->
+    <delete id="deleteResourceByCategoryId" parameterType="int">
+        delete from resource where category_id = #{categoryId}
+    </delete>
 </mapper>

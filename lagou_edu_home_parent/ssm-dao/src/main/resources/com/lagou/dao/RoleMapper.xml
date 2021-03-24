@@ -38,5 +38,22 @@
         delete from roles where id = #{roleid}
     </delete>
 
+    <!--根据角色ID及分类信息ID查询其对应的资源-->
+    <select id="findResourceListByRoleId" parameterType="java.lang.Integer" resultType="com.lagou.domain.Resource">
+        select resource.* from
+           resource inner join role_resource_relation
+           on resource.id = role_resource_relation.resource_id
+           and role_resource_relation.role_id = #{param1}
+        where resource.category_id = #{param2}
+    </select>
 
+    <!--根据roleid删除在中间表与资源的关联关系-->
+    <delete id="deleteRoleResourceRelationByRoleId" parameterType="java.lang.Integer">
+        delete from role_resource_relation where role_id = #{roleId}
+    </delete>
+
+    <!--为角色分配资源-->
+    <insert id="saveRoleResourceRelationByRoleResourceRelation" parameterType="com.lagou.domain.RoleResourceRelation">
+        insert into role_resource_relation values (null, #{resourceId}, #{roleId}, #{createdTime}, #{updatedTime}, #{createdBy}, #{updatedBy})
+    </insert>
 </mapper>
